@@ -23,6 +23,12 @@ class Spelling {
 
         compare(dictionary, text);
 
+        for(String list: text){
+            System.out.println(list);
+        }
+
+
+
 
     }
 
@@ -37,7 +43,8 @@ class Spelling {
                     costs.add(j, getLevenshteinDistance(text.get(i), dictionary.get(j)));
                 }
                 minIndex = costs.indexOf(Collections.min(costs));
-                System.out.println(minIndex);
+                text.set(i, dictionary.get(minIndex));
+                costs.clear();
             }
         }
     }
@@ -47,9 +54,9 @@ class Spelling {
             throw new IllegalArgumentException("Strings must not be null");
         }
 
-        int n = s.length(); // length of s
-        int m = t.length(); // length of t
-        s = s.toLowerCase();
+        int n = s.length(); // dlzka slova z textu
+        int m = t.length(); // dlzka slova zo slovniku
+        s = s.toLowerCase();// male pismena
 
         if (n == 0) {
             return m;
