@@ -39,7 +39,7 @@ public class Loader {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while (sc.hasNextLine()) {
+        while (sc.hasNext()) {
             list.add(sc.next());
         }
         return list;

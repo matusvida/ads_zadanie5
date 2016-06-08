@@ -15,20 +15,27 @@ class Spelling {
         List<String> text = new ArrayList<String>();
 
         try {
-            dictionary = Loader.loadLine("testSlovnik.txt");
-            text = Loader.loadText("testText.txt");
+            dictionary = Loader.loadLine("slovnik.txt");
+            text = Loader.loadText("text1.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+//        for(String list: text){
+//            System.out.println(list);
+//        }
+
         compare(dictionary, text);
 
-        for(String list: text){
-            System.out.println(list);
+//        for(String list: text){
+//            System.out.println(list);
+//        }
+
+        try {
+            Writer.write(text);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-
-
 
     }
 
@@ -38,11 +45,12 @@ class Spelling {
         int minIndex;
 
         for(int i=0; i<text.size(); i++){
-            if(!dictionary.contains(text.get(i))){
+            if(!dictionary.contains(text.get(i)) && !(text.get(i).matches(".*\\d.*"))){
                 for(int j=0; j<dictionary.size(); j++){
                     costs.add(j, getLevenshteinDistance(text.get(i), dictionary.get(j)));
                 }
                 minIndex = costs.indexOf(Collections.min(costs));
+                System.out.println(text.get(i) + " -> "+ dictionary.get(minIndex));
                 text.set(i, dictionary.get(minIndex));
                 costs.clear();
             }
